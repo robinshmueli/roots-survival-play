@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="he" dir="rtl">
   <head>
-    <meta name="game-build" content="a8c46f12345202a5" />
+    <meta name="game-build" content="eba63fb7b2c9264a" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#243b29" />
     <meta name="description" content="התחלה של משחק הישרדות במבט על. צאו לגלות את היער עם WASD." />
     <title>שורשים — משחק הישרדות</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2323352a'/%3E%3Cpath d='M32 8 13 33h9L12 47h16v10h8V47h16L42 33h9Z' fill='%23c5d49b'/%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="./builds/a8c46f12345202a5/src/style.css" />
+    <link rel="stylesheet" href="./builds/eba63fb7b2c9264a/src/style.css" />
   </head>
   <body>
     <section id="main-menu" class="main-menu" aria-label="התפריט הראשי">
@@ -69,7 +69,7 @@
         </svg>
         <div class="compass-reading"><span id="compass-heading">דרום</span><span id="compass-bearing" dir="ltr">180°</span></div>
       </aside>
-      <button id="map-toggle" class="mini-map" aria-label="פתיחת מפת העולם — מקש M">
+      <button id="map-toggle" class="mini-map" aria-label="פתיחת מפת העולם — מקש M. הבית תמיד מסומן במפה הקטנה" title="סמל הבית מציין את האוהל; חץ בקצה המפה מראה את הכיוון אליו">
         <canvas id="world-map" width="160" height="160" aria-hidden="true"></canvas>
         <span>מפה מקומית <kbd dir="ltr">M</kbd></span>
       </button>
@@ -91,8 +91,8 @@
       </aside>
       <aside id="stamina-panel" class="stamina-panel" data-state="ready" aria-label="סיבולת לספרינט">
         <div class="stamina-heading"><strong>סיבולת</strong><span id="sprint-status">מוכנים</span></div>
-        <div id="stamina-meter" class="stamina-track" role="progressbar" aria-label="סיבולת שנותרה בשניות" aria-valuemin="0" aria-valuemax="10" aria-valuenow="10"><div id="stamina-fill"></div></div>
-        <div class="stamina-caption"><span>ספרינט <kbd dir="ltr">Shift</kbd></span><span id="stamina-time" dir="ltr">10.0 / 10s</span></div>
+        <div id="stamina-meter" class="stamina-track" role="progressbar" aria-label="סיבולת שנותרה בשניות" aria-valuemin="0" aria-valuemax="20" aria-valuenow="20"><div id="stamina-fill"></div></div>
+        <div class="stamina-caption"><span>ספרינט <kbd dir="ltr">Shift</kbd></span><span id="stamina-time" dir="ltr">20.0 / 20s</span></div>
       </aside>
       <dialog id="inventory" aria-labelledby="inventory-title">
         <header class="atlas-heading"><div><h2 id="inventory-title">התיק שלי <span id="bag-usage" dir="ltr">0 / 15</span></h2><p>15 מקומות בתיק + 3 ביד · עד 20 מכל סוג</p></div><button id="inventory-close" class="pixel-close" aria-label="סגירת התיק">×</button></header>
@@ -100,12 +100,19 @@
         <div class="bag-hand-heading"><strong id="bag-selected">מציידים ליד 1</strong><button id="unequip" type="button">העברת היד לתיק</button></div>
         <div id="bag-hands" class="bag-hands" dir="ltr" aria-label="שלושת המקומות ביד"></div>
         <p id="bag-drag-status" class="bag-drag-status" role="status" aria-live="polite">קליק ימני להרמה · קליק נוסף להנחה · אפשר גם לגרור</p>
-        <p class="bag-tip">מעבירים בין התיק לידיים · מקום תפוס מחליף פריטים<br>תפוח ביד: לחיצה / רווח לאכילה<br>אבנים, גבעולים, בולים ותפוחים אוספים עם E · סוגרים עם C או Escape</p>
+        <p class="bag-tip">מעבירים בין התיק לידיים · מקום תפוס מחליף פריטים<br>אוכל מבושל או פרי ביד: לחיצה / רווח לאכילה<br>אבנים, גבעולים, בולים ותפוחים אוספים עם E · סוגרים עם C או Escape</p>
       </dialog>
       <dialog id="chest-storage" aria-labelledby="chest-title">
         <header class="atlas-heading"><div><h2 id="chest-title">תיבת אחסון</h2><p>שמרו ציוד במחנה ואספו אותו כשתחזרו</p></div><button id="chest-close" type="button" class="pixel-close" aria-label="סגירת תיבת האחסון">×</button></header>
         <div class="storage-columns"><section><h3>בתיבה <span id="chest-usage" dir="ltr">0 / 15</span></h3><div id="chest-slots" class="storage-grid" dir="ltr"></div></section><section><h3>הציוד שלך</h3><div id="chest-player-slots" class="storage-grid" dir="ltr"></div></section></div>
         <p id="chest-status" role="status" aria-live="polite">לחיצה להעברת ערימה · קליק ימני להעברת פריט אחד</p><p class="bag-tip">E או Escape לסגירה</p>
+      </dialog>
+      <dialog id="furnace-storage" aria-labelledby="furnace-title">
+        <header class="atlas-heading"><div><h2 id="furnace-title">תנור אבן</h2><p>מכניסים עץ ובשר נא · אוספים אוכל מבושל</p></div><button id="furnace-close" type="button" class="pixel-close" aria-label="סגירת התנור">×</button></header>
+        <div class="furnace-workspace"><section><h3>דלק</h3><div id="furnace-fuel"></div></section><div class="furnace-fire"><span id="furnace-flame" aria-hidden="true" data-burning="false">♨</span><strong id="furnace-heat">התנור כבוי</strong></div><section><h3>בשר נא</h3><div id="furnace-input"></div></section><section><h3>אוכל מוכן</h3><div id="furnace-output"></div></section></div>
+        <div id="furnace-progress" class="furnace-progress" role="progressbar" aria-label="התקדמות הבישול" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div></div></div>
+        <p id="furnace-fuel-info" class="bag-tip"></p><h3>הציוד שלך</h3><div id="furnace-player-slots" class="storage-grid" dir="ltr"></div>
+        <p id="furnace-status" role="status" aria-live="polite"></p><p class="bag-tip">לחיצה להעברת ערימה · קליק ימני לפריט אחד · E או Escape לסגירה</p>
       </dialog>
       <dialog id="crafting" aria-labelledby="craft-title">
         <header class="craft-heading"><div class="craft-title-plaque"><h2 id="craft-title">גלגל יצירה</h2><p id="craft-station">יצירה בידיים</p></div><button id="craft-close" type="button" class="pixel-close" aria-label="סגירת מסך היצירה">×</button></header>
@@ -132,14 +139,14 @@
         <div class="hotbar-tip">1–3 בחירה · E איסוף · C תיק · F יצירה</div>
       </footer>
       <div id="game-message" class="game-message" role="status" aria-live="polite" hidden></div>
-      <dialog id="death-screen" aria-labelledby="death-title"><div class="death-heart" aria-hidden="true">♥</div><h2 id="death-title">המסע הסתיים</h2><p>נגמרו החיים מרעב.<br>במסע הבא, אספו תפוחים ושמרו אוכל לדרך.</p><button id="restart-game" type="button">משחק חדש</button></dialog>
+      <dialog id="death-screen" aria-labelledby="death-title"><div class="death-heart" aria-hidden="true">♥</div><h2 id="death-title">המסע הסתיים</h2><p>נגמרו החיים.<br>אספו אוכל לדרך והיזהרו מהחיות בלילה.</p><button id="restart-game" type="button">משחק חדש</button></dialog>
       <button id="worlds-menu" class="worlds-menu" type="button">☰ עולמות</button>
       <button id="save-status" type="button" class="save-status" role="status" title="שמירה אוטומטית בדפדפן הזה · לחיצה לשמירה מיידית">שמירה אוטומטית</button>
-      <div class="version" dir="ltr"><span></span> SURVIVAL <b>3.5</b></div>
+      <div class="version" dir="ltr"><span></span> SURVIVAL <b>3.6</b></div>
       <div id="notice" class="notice" role="status" hidden></div>
     </main>
     <script type="module">
-      import('./builds/a8c46f12345202a5/src/boot.js').catch((error) => {
+      import('./builds/eba63fb7b2c9264a/src/boot.js').catch((error) => {
         console.error(error);
         const notice = document.getElementById('notice');
         notice.textContent = 'לא הצלחנו להפעיל את המשחק. נסו לרענן את הדף או לפתוח אותו בדפדפן מעודכן.';
