@@ -1,24 +1,24 @@
 <!doctype html>
 <html lang="he" dir="rtl">
   <head>
-    <meta name="game-build" content="0341aa29e67cc328" />
+    <meta name="game-build" content="dd4ad91610adba3b" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#243b29" />
     <meta name="description" content="התחלה של משחק הישרדות במבט על. צאו לגלות את היער עם WASD." />
     <title>שורשים — משחק הישרדות</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2323352a'/%3E%3Cpath d='M32 8 13 33h9L12 47h16v10h8V47h16L42 33h9Z' fill='%23c5d49b'/%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="./builds/0341aa29e67cc328/src/style.css" />
+    <link rel="stylesheet" href="./builds/dd4ad91610adba3b/src/style.css" />
   </head>
   <body>
     <section id="main-menu" class="main-menu" aria-label="התפריט הראשי">
-      <div class="menu-landscape" aria-hidden="true"><div class="menu-moon"></div><div class="menu-trees menu-trees-back"></div><div class="menu-trees menu-trees-front"></div></div>
+      <div class="menu-landscape" aria-hidden="true"><img class="menu-background" src="./builds/dd4ad91610adba3b/src/assets/menu-beach.png" alt="" fetchpriority="high" decoding="async"></div>
       <div class="menu-shell">
         <header class="menu-brand"><span class="menu-eyebrow" dir="ltr">ROOTS · SURVIVAL</span><h1>שורשים</h1><p>כל עולם הוא התחלה חדשה.</p></header>
         <section data-menu-screen="home" class="menu-panel menu-home"><div class="menu-home-tree" aria-hidden="true">♧</div><h2 tabindex="-1">המסע שלך מתחיל כאן</h2><p>לבנות מחנה. לגלות יערות. להישאר עד הבוקר.</p><button class="menu-button menu-primary" type="button" data-go="worlds">עולמות <span aria-hidden="true">←</span></button><p class="menu-note">העולמות וההתקדמות נשמרים בדפדפן הזה.</p></section>
         <section data-menu-screen="worlds" class="menu-panel" hidden><div class="menu-heading"><div><h2 tabindex="-1">העולמות שלי</h2><p id="world-count"></p></div><button class="menu-back" type="button" data-go="home">חזרה</button></div><div id="world-list" class="world-list"></div><p id="no-worlds" class="no-worlds">עדיין אין כאן עולמות.<br>צרו עולם, מצאו מקום למחנה וצאו לדרך.</p><button class="menu-button menu-primary" type="button" data-go="create">＋ צור עולם חדש</button></section>
         <section data-menu-screen="create" class="menu-panel" hidden><div class="menu-heading"><div><h2 tabindex="-1">עולם חדש</h2><p>בחרו כמה רחוק תרצו ללכת.</p></div><button class="menu-back" type="button" data-go="worlds">חזרה</button></div><form id="create-world-form"><label class="world-name-label" for="world-name">שם העולם</label><input id="world-name" name="world-name" type="text" maxlength="40" placeholder="איך יקראו לעולם שלך?" required autocomplete="off"><fieldset><legend>גודל העולם</legend><div id="world-sizes" class="world-sizes"></div></fieldset><fieldset class="difficulty-fieldset"><legend>רמת קושי</legend><div id="world-difficulties" class="world-difficulties"></div></fieldset><div class="world-rules"><span aria-hidden="true">✦</span><p>מפה חדשה בכל עולם: יערות, אגמים וחופים במקומות אחרים.<br>השלג תמיד בצפון · המדבר תמיד בדרום.</p></div><button class="menu-button menu-primary" type="submit">צור עולם וצא לדרך <span aria-hidden="true">←</span></button></form></section>
-        <p id="menu-status" class="menu-status" role="status" aria-live="polite"></p><span class="menu-version" dir="ltr">ROOTS 3.7</span>
+        <p id="menu-status" class="menu-status" role="status" aria-live="polite"></p><span class="menu-version" dir="ltr">ROOTS 3.8</span>
       </div>
     </section>
     <main hidden id="game" aria-label="משחק הישרדות במבט על — תנועה עם WASD">
@@ -84,11 +84,6 @@
         <p id="atlas-coordinates" class="atlas-coordinates" dir="ltr">X 0 · Y 0</p>
         <p class="atlas-tip">גלגלת או + / − לזום · גרירה וחצים להזזה · במגע: צביטה לזום<br>0 לכל העולם · סוגרים עם M או Escape</p>
       </dialog>
-      <aside id="survival-panel" class="survival-panel" data-state="fed" aria-label="חיים ורעב">
-        <div class="vital-row"><canvas id="health-icon" width="24" height="24" aria-hidden="true"></canvas><div class="vital-copy"><div class="vital-heading"><strong>חיים</strong><span id="health-value" dir="ltr">100 / 100</span></div><div id="health-meter" class="vital-track health-track" role="progressbar" aria-label="חיים" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div id="health-fill"></div></div></div></div>
-        <div class="vital-row"><canvas id="hunger-icon" width="24" height="24" aria-hidden="true"></canvas><div class="vital-copy"><div class="vital-heading"><strong>רעב</strong><span id="hunger-value" dir="ltr">100 / 100</span></div><div id="hunger-meter" class="vital-track hunger-track" role="progressbar" aria-label="רעב" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div id="hunger-fill"></div></div></div></div>
-        <p id="hunger-status" hidden></p>
-      </aside>
       <aside id="stamina-panel" class="stamina-panel" data-state="ready" aria-label="סיבולת לספרינט">
         <div class="stamina-heading"><strong>סיבולת</strong><span id="sprint-status">מוכנים</span></div>
         <div id="stamina-meter" class="stamina-track" role="progressbar" aria-label="סיבולת שנותרה בשניות" aria-valuemin="0" aria-valuemax="20" aria-valuenow="20"><div id="stamina-fill"></div></div>
@@ -98,7 +93,7 @@
         <header class="atlas-heading"><div><h2 id="inventory-title">התיק שלי <span id="bag-usage" dir="ltr">0 / 15</span></h2><p>15 מקומות בתיק + 3 ביד · עד 20 מכל סוג</p></div><button id="inventory-close" class="pixel-close" aria-label="סגירת התיק">×</button></header>
         <div id="bag-grid" class="bag-grid" aria-label="תכולת התיק"></div>
         <div class="bag-hand-heading"><strong id="bag-selected">מציידים ליד 1</strong><button id="unequip" type="button">העברת היד לתיק</button></div>
-        <div id="bag-hands" class="bag-hands" dir="ltr" aria-label="שלושת המקומות ביד"></div>
+        <div id="bag-hands" class="bag-hands" dir="ltr" aria-label="חמשת המקומות ביד"></div>
         <p id="bag-drag-status" class="bag-drag-status" role="status" aria-live="polite">קליק ימני להרמה · קליק נוסף להנחה · אפשר גם לגרור</p>
         <p class="bag-tip">מעבירים בין התיק לידיים · מקום תפוס מחליף פריטים<br>אוכל מבושל או פרי ביד: לחיצה / רווח לאכילה<br>אבנים, גבעולים, בולים ותפוחים אוספים עם E · סוגרים עם C או Escape</p>
       </dialog>
@@ -108,8 +103,9 @@
         <p id="chest-status" role="status" aria-live="polite">לחיצה להעברת ערימה · קליק ימני להעברת פריט אחד</p><p class="bag-tip">E או Escape לסגירה</p>
       </dialog>
       <dialog id="furnace-storage" aria-labelledby="furnace-title">
-        <header class="atlas-heading"><div><h2 id="furnace-title">תנור אבן</h2><p>מכניסים עץ ובשר נא · אוספים אוכל מבושל</p></div><button id="furnace-close" type="button" class="pixel-close" aria-label="סגירת התנור">×</button></header>
-        <div class="furnace-workspace"><section><h3>דלק</h3><div id="furnace-fuel"></div></section><div class="furnace-fire"><span id="furnace-flame" aria-hidden="true" data-burning="false">♨</span><strong id="furnace-heat">התנור כבוי</strong></div><section><h3>בשר נא</h3><div id="furnace-input"></div></section><section><h3>אוכל מוכן</h3><div id="furnace-output"></div></section></div>
+        <header class="atlas-heading furnace-heading"><canvas id="furnace-title-art" width="64" height="64" aria-hidden="true"></canvas><div><h2 id="furnace-title">תנור אבן</h2><p>עץ או פחם + בשר נא = ארוחה חמה</p></div><button id="furnace-close" type="button" class="pixel-close" aria-label="סגירת התנור">×</button></header>
+        <div class="furnace-workspace"><section class="furnace-fuels"><h3>דלק</h3><div class="furnace-fuel-slots"><div id="furnace-fuel"></div><div id="furnace-coal"></div></div></section><section><h3>בשר נא</h3><div id="furnace-input"></div></section><div class="furnace-fire"><canvas id="furnace-flame" width="32" height="40" aria-hidden="true" data-burning="false"></canvas><strong id="furnace-heat">התנור כבוי</strong><svg class="furnace-arrow" width="32" height="16" viewBox="0 0 32 16" aria-hidden="true"><path d="M0 6h4V2h4V0h4v5h20v6H12v5H8v-2H4v-4H0z" fill="currentColor"/></svg></div><section class="furnace-output"><h3>אוכל מוכן</h3><div id="furnace-output"></div></section></div>
+        <div class="furnace-progress-heading"><span>התקדמות הבישול</span><span id="furnace-progress-label" dir="ltr">0 / 5s</span></div>
         <div id="furnace-progress" class="furnace-progress" role="progressbar" aria-label="התקדמות הבישול" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div></div></div>
         <p id="furnace-fuel-info" class="bag-tip"></p><h3>הציוד שלך</h3><div id="furnace-player-slots" class="storage-grid" dir="ltr"></div>
         <p id="furnace-status" role="status" aria-live="polite"></p><p class="bag-tip">לחיצה להעברת ערימה · קליק ימני לפריט אחד · E או Escape לסגירה</p>
@@ -132,21 +128,28 @@
           </section>
         </div>
       </dialog>
-      <footer class="hotbar" aria-label="ציוד ביד">
+      <div class="player-hud" role="group" aria-label="ציוד ומצב הדמות">
         <div id="target-info" class="target-info">התקרבו לעץ · לחיצה או רווח למכה</div>
+        <aside id="survival-panel" class="survival-panel" data-state="fed" aria-label="חיים ורעב">
+          <div class="vital-row"><canvas id="health-icon" width="24" height="24" aria-hidden="true"></canvas><div class="vital-copy"><div class="vital-heading"><strong>חיים</strong><span id="health-value" dir="ltr">100 / 100</span></div><div id="health-meter" class="vital-track health-track" role="progressbar" aria-label="חיים" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div id="health-fill"></div></div></div></div>
+          <div class="vital-row"><canvas id="hunger-icon" width="24" height="24" aria-hidden="true"></canvas><div class="vital-copy"><div class="vital-heading"><strong>רעב</strong><span id="hunger-value" dir="ltr">100 / 100</span></div><div id="hunger-meter" class="vital-track hunger-track" role="progressbar" aria-label="רעב" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div id="hunger-fill"></div></div></div></div>
+          <p id="hunger-status" hidden></p>
+        </aside>
+      <footer class="hotbar" aria-label="ציוד ביד">
         <div class="hotbar-heading"><span>ביד: <strong id="equipped-name">אבן</strong></span><span id="item-action">מכה כל 0.6 שנ׳</span></div>
         <div class="hotbar-row"><div id="hotbar-slots" class="hotbar-slots" dir="ltr" role="group" aria-label="בחירת פריט במקשים 1 עד 3"></div><div class="hotbar-actions"><button id="bag-toggle" type="button" aria-label="פתיחת התיק — C" title="התיק · C"><canvas id="bag-icon" width="24" height="24" aria-hidden="true"></canvas><kbd dir="ltr">C</kbd></button><button id="craft-open" type="button" aria-label="יצירה וספר מתכונים — F" title="יצירה · F"><canvas id="craft-toggle" width="24" height="24" aria-hidden="true"></canvas><kbd dir="ltr">F</kbd></button></div></div>
-        <div class="hotbar-tip">1–3 בחירה · E איסוף · C תיק · F יצירה</div>
+        <div class="hotbar-tip">1–5 בחירה · E איסוף · C תיק · F יצירה</div>
       </footer>
       <div id="game-message" class="game-message" role="status" aria-live="polite" hidden></div>
-      <dialog id="death-screen" aria-labelledby="death-title"><div class="death-heart" aria-hidden="true">♥</div><h2 id="death-title">המסע הסתיים</h2><p>נגמרו החיים.<br>אספו אוכל לדרך והיזהרו מהחיות בלילה.</p><button id="restart-game" type="button">משחק חדש</button></dialog>
+      </div>
+      <dialog id="death-screen" aria-labelledby="death-title" aria-describedby="death-description"><div class="death-heart" aria-hidden="true">♥</div><h2 id="death-title">נגמרו החיים</h2><p id="death-description">העולם נשמר. הציוד ממתין ליד הגולגולת במפה למשך 3 דקות משחק פעיל. חזרו ואספו אותו עם E.</p><div class="death-actions"><button id="respawn-home" type="button" autofocus>לחזור הביתה</button><button id="death-menu" type="button">לחזור לתפריט הראשי</button></div><p id="death-status" role="status" hidden></p></dialog>
       <button id="worlds-menu" class="worlds-menu" type="button">☰ עולמות</button>
       <button id="save-status" type="button" class="save-status" role="status" title="שמירה אוטומטית בדפדפן הזה · לחיצה לשמירה מיידית">שמירה אוטומטית</button>
-      <div class="version" dir="ltr"><span></span> SURVIVAL <b>3.7</b></div>
+      <div class="version" dir="ltr"><span></span> SURVIVAL <b>3.8</b></div>
       <div id="notice" class="notice" role="status" hidden></div>
     </main>
     <script type="module">
-      import('./builds/0341aa29e67cc328/src/boot.js').catch((error) => {
+      import('./builds/dd4ad91610adba3b/src/boot.js').catch((error) => {
         console.error(error);
         const notice = document.getElementById('notice');
         notice.textContent = 'לא הצלחנו להפעיל את המשחק. נסו לרענן את הדף או לפתוח אותו בדפדפן מעודכן.';
