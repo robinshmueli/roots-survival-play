@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta name="game-build" content="caddb8ba2c35b7c9" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#243b29" />
+    <meta name="description" content="התחלה של משחק הישרדות במבט על. צאו לגלות את היער עם WASD." />
+    <title>שורשים — משחק הישרדות</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2323352a'/%3E%3Cpath d='M32 8 13 33h9L12 47h16v10h8V47h16L42 33h9Z' fill='%23c5d49b'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="./builds/caddb8ba2c35b7c9/src/style.css" />
+  </head>
+  <body>
+    <main id="game" aria-label="משחק הישרדות במבט על — תנועה עם WASD">
+      <div class="vignette" aria-hidden="true"></div>
+      <div id="damage-flash" aria-hidden="true"></div>
+      <header class="identity">
+        <div class="tree-mark" aria-hidden="true">♧</div>
+        <div><h1>שורשים<span>ROOTS</span></h1><p>כל מסע מתחיל בצעד קטן.</p></div>
+      </header>
+      <div class="fullscreen-control">
+        <button id="fullscreen-toggle" type="button" aria-label="מעבר למסך מלא" aria-pressed="false" title="מעבר למסך מלא">
+          <svg class="fullscreen-enter" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 3H3v4m10-4h4v4M3 13v4h4m10-4v4h-4"/></svg>
+          <svg class="fullscreen-exit" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 7h4V3m6 0v4h4M7 17v-4H3m14 0h-4v4"/></svg>
+          <span id="fullscreen-label">מסך מלא</span>
+        </button>
+        <span id="fullscreen-status" role="status" hidden></span>
+      </div>
+      <aside class="location" aria-label="מיקום בעולם">
+        <div class="location-heading"><span class="live-dot"></span><span id="biome-name">היער הירוק</span></div>
+        <div id="coordinates" dir="ltr">X 0 &nbsp; Y 0</div>
+      </aside>
+      <aside id="day-cycle" class="day-cycle" data-period="day" aria-label="מחזור יום ולילה">
+        <div class="period-heading">
+          <span id="period-icon" class="period-icon" aria-hidden="true">☀</span>
+          <strong id="period-label" role="status" aria-live="polite">יום</strong>
+          <span id="day-number">יום 1</span>
+        </div>
+        <div id="period-countdown">ערב בעוד 2:00</div>
+        <div class="period-track" aria-hidden="true"><div id="period-progress"></div></div>
+      </aside>
+      <aside id="compass" class="compass" role="img" aria-label="מצפן, כיוון ההליכה: דרום, 180 מעלות">
+        <span class="compass-title">מצפן</span>
+        <svg viewBox="0 0 128 128" width="128" height="128" aria-hidden="true">
+          <circle cx="64" cy="64" r="37" fill="#253b2c" stroke="#a8ad7b" stroke-width="1.5"/>
+          <circle cx="64" cy="64" r="30" fill="none" stroke="#5d7351" stroke-width="1"/>
+          <path d="M64 27v7m0 60v7M27 64h7m60 0h7M38 38l5 5m42 42 5 5M38 90l5-5m42-42 5-5" stroke="#bac79b" stroke-width="2"/>
+          <path d="M64 24v9" stroke="#ed9a78" stroke-width="3"/>
+          <g id="compass-needle" transform="rotate(180 64 64)">
+            <path d="M64 91l-5-28h10z" fill="#a3b594" stroke="#1d3229" stroke-width="1"/>
+            <path d="M64 34l8 34-8-5-8 5z" fill="#f7d38b" stroke="#1d3229" stroke-width="1.5"/>
+            <path d="M64 38v25l-6 3z" fill="#fff0b5"/>
+          </g>
+          <circle cx="64" cy="64" r="4" fill="#f7e1aa" stroke="#344734" stroke-width="2"/>
+          <text class="compass-north" x="64" y="12">צפון</text>
+          <text x="64" y="116">דרום</text>
+          <text x="110" y="65">מזרח</text>
+          <text x="18" y="65">מערב</text>
+        </svg>
+        <div class="compass-reading"><span id="compass-heading">דרום</span><span id="compass-bearing" dir="ltr">180°</span></div>
+      </aside>
+      <button id="map-toggle" class="mini-map" aria-label="פתיחת מפת העולם — מקש M">
+        <canvas id="world-map" width="160" height="160" aria-hidden="true"></canvas>
+        <span>מפה מקומית <kbd dir="ltr">M</kbd></span>
+      </button>
+      <dialog id="atlas" aria-labelledby="atlas-title">
+        <header class="atlas-heading"><div><h2 id="atlas-title">העולם של שורשים</h2><p>גלו את העולם בהליכה · עננים מסתירים אזורים לא מוכרים</p></div><button id="atlas-close" aria-label="סגירת המפה">×</button></header>
+        <div class="atlas-toolbar" aria-label="ניווט במפה">
+          <div class="atlas-zoom-controls" dir="ltr"><button id="atlas-zoom-out" type="button" aria-label="הקטנת המפה">−</button><output id="atlas-zoom" aria-label="רמת הגדלה">×1</output><button id="atlas-zoom-in" type="button" aria-label="הגדלת המפה">+</button></div>
+          <div class="atlas-location-controls"><button id="atlas-center" type="button">אליי</button><button id="atlas-fit" type="button">כל העולם</button></div>
+        </div>
+        <canvas id="atlas-map" width="640" height="640" tabindex="0" aria-label="מפת האזורים, העצים, האגמים והמיקום הנוכחי"></canvas>
+        <div class="atlas-legend" aria-label="מקרא המפה"><span><i class="legend-lake"></i>מים</span><span><i class="legend-tree"></i>עצים</span><span><i class="legend-rock"></i>סלעים</span><span><i class="legend-stump"></i>גדמים</span><span><i class="legend-cloud"></i>לא נחקר</span><span><i class="legend-player"></i>אתם כאן</span></div>
+        <p id="atlas-coordinates" class="atlas-coordinates" dir="ltr">X 0 · Y 0</p>
+        <p class="atlas-tip">גלגלת או + / − לזום · גרירה וחצים להזזה · במגע: צביטה לזום<br>0 לכל העולם · סוגרים עם M או Escape</p>
+      </dialog>
+      <aside id="survival-panel" class="survival-panel" data-state="fed" aria-label="חיים ורעב">
+        <div class="vital-row"><canvas id="health-icon" width="24" height="24" aria-hidden="true"></canvas><div class="vital-copy"><div class="vital-heading"><strong>חיים</strong><span id="health-value" dir="ltr">100 / 100</span></div><div id="health-meter" class="vital-track health-track" role="progressbar" aria-label="חיים" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div id="health-fill"></div></div></div></div>
+        <div class="vital-row"><canvas id="hunger-icon" width="24" height="24" aria-hidden="true"></canvas><div class="vital-copy"><div class="vital-heading"><strong>רעב</strong><span id="hunger-value" dir="ltr">100 / 100</span></div><div id="hunger-meter" class="vital-track hunger-track" role="progressbar" aria-label="רעב" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div id="hunger-fill"></div></div></div></div>
+        <p id="hunger-status" hidden></p>
+      </aside>
+      <aside id="stamina-panel" class="stamina-panel" data-state="ready" aria-label="סיבולת לספרינט">
+        <div class="stamina-heading"><strong>סיבולת</strong><span id="sprint-status">מוכנים</span></div>
+        <div id="stamina-meter" class="stamina-track" role="progressbar" aria-label="סיבולת שנותרה בשניות" aria-valuemin="0" aria-valuemax="10" aria-valuenow="10"><div id="stamina-fill"></div></div>
+        <div class="stamina-caption"><span>ספרינט <kbd dir="ltr">Shift</kbd></span><span id="stamina-time" dir="ltr">10.0 / 10s</span></div>
+      </aside>
+      <dialog id="inventory" aria-labelledby="inventory-title">
+        <header class="atlas-heading"><div><h2 id="inventory-title">התיק שלי <span id="bag-usage" dir="ltr">0 / 15</span></h2><p>15 מקומות בתיק + 3 ביד · עד 20 מכל סוג</p></div><button id="inventory-close" class="pixel-close" aria-label="סגירת התיק">×</button></header>
+        <div id="bag-grid" class="bag-grid" aria-label="תכולת התיק"></div>
+        <div class="bag-hand-heading"><strong id="bag-selected">מציידים ליד 1</strong><button id="unequip" type="button">העברת היד לתיק</button></div>
+        <div id="bag-hands" class="bag-hands" dir="ltr" aria-label="שלושת המקומות ביד"></div>
+        <p id="bag-drag-status" class="bag-drag-status" role="status" aria-live="polite">קליק ימני להרמה · קליק נוסף להנחה · אפשר גם לגרור</p>
+        <p class="bag-tip">מעבירים בין התיק לידיים · מקום תפוס מחליף פריטים<br>תפוח ביד: לחיצה / רווח לאכילה<br>בולים ותפוחים אוספים עם E · סוגרים עם C או Escape</p>
+      </dialog>
+      <footer class="hotbar" aria-label="ציוד ביד">
+        <div id="target-info" class="target-info">התקרבו לעץ · לחיצה או רווח למכה</div>
+        <div class="hotbar-heading"><span>ביד: <strong id="equipped-name">אבן</strong></span><span id="item-action">מכה כל 0.5 שנ׳</span></div>
+        <div class="hotbar-row"><div id="hotbar-slots" class="hotbar-slots" dir="ltr" role="group" aria-label="בחירת פריט במקשים 1 עד 3"></div><button id="bag-toggle" type="button" aria-label="פתיחת התיק — C" title="התיק · C"><canvas id="bag-icon" width="24" height="24" aria-hidden="true"></canvas><kbd dir="ltr">C</kbd></button></div>
+        <div class="hotbar-tip">1–3 בחירה · לחיצה / רווח שימוש · E איסוף · C תיק</div>
+      </footer>
+      <div id="game-message" class="game-message" role="status" aria-live="polite" hidden></div>
+      <dialog id="death-screen" aria-labelledby="death-title"><div class="death-heart" aria-hidden="true">♥</div><h2 id="death-title">המסע הסתיים</h2><p>נגמרו החיים מרעב.<br>במסע הבא, אספו תפוחים ושמרו אוכל לדרך.</p><button id="restart-game" type="button">משחק חדש</button></dialog>
+      <div class="version" dir="ltr"><span></span> SURVIVAL <b>2.2</b></div>
+      <div id="notice" class="notice" role="status" hidden></div>
+    </main>
+    <script type="module">
+      import('./builds/caddb8ba2c35b7c9/src/main.js').catch((error) => {
+        console.error(error);
+        const notice = document.getElementById('notice');
+        notice.textContent = 'לא הצלחנו להפעיל את המשחק. נסו לרענן את הדף או לפתוח אותו בדפדפן מעודכן.';
+        notice.hidden = false;
+      });
+    </script>
+  </body>
+</html>
