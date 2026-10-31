@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="he" dir="rtl">
   <head>
-    <meta name="game-build" content="eba63fb7b2c9264a" />
+    <meta name="game-build" content="0341aa29e67cc328" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#243b29" />
     <meta name="description" content="התחלה של משחק הישרדות במבט על. צאו לגלות את היער עם WASD." />
     <title>שורשים — משחק הישרדות</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2323352a'/%3E%3Cpath d='M32 8 13 33h9L12 47h16v10h8V47h16L42 33h9Z' fill='%23c5d49b'/%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="./builds/eba63fb7b2c9264a/src/style.css" />
+    <link rel="stylesheet" href="./builds/0341aa29e67cc328/src/style.css" />
   </head>
   <body>
     <section id="main-menu" class="main-menu" aria-label="התפריט הראשי">
@@ -18,7 +18,7 @@
         <section data-menu-screen="home" class="menu-panel menu-home"><div class="menu-home-tree" aria-hidden="true">♧</div><h2 tabindex="-1">המסע שלך מתחיל כאן</h2><p>לבנות מחנה. לגלות יערות. להישאר עד הבוקר.</p><button class="menu-button menu-primary" type="button" data-go="worlds">עולמות <span aria-hidden="true">←</span></button><p class="menu-note">העולמות וההתקדמות נשמרים בדפדפן הזה.</p></section>
         <section data-menu-screen="worlds" class="menu-panel" hidden><div class="menu-heading"><div><h2 tabindex="-1">העולמות שלי</h2><p id="world-count"></p></div><button class="menu-back" type="button" data-go="home">חזרה</button></div><div id="world-list" class="world-list"></div><p id="no-worlds" class="no-worlds">עדיין אין כאן עולמות.<br>צרו עולם, מצאו מקום למחנה וצאו לדרך.</p><button class="menu-button menu-primary" type="button" data-go="create">＋ צור עולם חדש</button></section>
         <section data-menu-screen="create" class="menu-panel" hidden><div class="menu-heading"><div><h2 tabindex="-1">עולם חדש</h2><p>בחרו כמה רחוק תרצו ללכת.</p></div><button class="menu-back" type="button" data-go="worlds">חזרה</button></div><form id="create-world-form"><label class="world-name-label" for="world-name">שם העולם</label><input id="world-name" name="world-name" type="text" maxlength="40" placeholder="איך יקראו לעולם שלך?" required autocomplete="off"><fieldset><legend>גודל העולם</legend><div id="world-sizes" class="world-sizes"></div></fieldset><fieldset class="difficulty-fieldset"><legend>רמת קושי</legend><div id="world-difficulties" class="world-difficulties"></div></fieldset><div class="world-rules"><span aria-hidden="true">✦</span><p>מפה חדשה בכל עולם: יערות, אגמים וחופים במקומות אחרים.<br>השלג תמיד בצפון · המדבר תמיד בדרום.</p></div><button class="menu-button menu-primary" type="submit">צור עולם וצא לדרך <span aria-hidden="true">←</span></button></form></section>
-        <p id="menu-status" class="menu-status" role="status" aria-live="polite"></p><span class="menu-version" dir="ltr">ROOTS 3.5</span>
+        <p id="menu-status" class="menu-status" role="status" aria-live="polite"></p><span class="menu-version" dir="ltr">ROOTS 3.7</span>
       </div>
     </section>
     <main hidden id="game" aria-label="משחק הישרדות במבט על — תנועה עם WASD">
@@ -80,7 +80,7 @@
           <div class="atlas-location-controls"><button id="atlas-center" type="button">אליי</button><button id="atlas-fit" type="button">כל העולם</button></div>
         </div>
         <canvas id="atlas-map" width="640" height="640" tabindex="0" aria-label="מפת האזורים, העצים, האגמים והמיקום הנוכחי"></canvas>
-        <div class="atlas-legend" aria-label="מקרא המפה"><span><i class="legend-lake"></i>מים</span><span><i class="legend-tree"></i>עצים</span><span><i class="legend-rock"></i>סלעים</span><span><i class="legend-stump"></i>גדמים</span><span><i class="legend-cloud"></i>לא נחקר</span><span><i class="legend-player"></i>אתם כאן</span></div>
+        <div class="atlas-legend" aria-label="מקרא המפה"><span><i class="legend-lake"></i>מים</span><span><i class="legend-tree"></i>עצים</span><span><i class="legend-rock"></i>סלעים</span><span><i class="legend-cloud"></i>לא נחקר</span><span><i class="legend-player"></i>אתם כאן</span></div>
         <p id="atlas-coordinates" class="atlas-coordinates" dir="ltr">X 0 · Y 0</p>
         <p class="atlas-tip">גלגלת או + / − לזום · גרירה וחצים להזזה · במגע: צביטה לזום<br>0 לכל העולם · סוגרים עם M או Escape</p>
       </dialog>
@@ -142,11 +142,11 @@
       <dialog id="death-screen" aria-labelledby="death-title"><div class="death-heart" aria-hidden="true">♥</div><h2 id="death-title">המסע הסתיים</h2><p>נגמרו החיים.<br>אספו אוכל לדרך והיזהרו מהחיות בלילה.</p><button id="restart-game" type="button">משחק חדש</button></dialog>
       <button id="worlds-menu" class="worlds-menu" type="button">☰ עולמות</button>
       <button id="save-status" type="button" class="save-status" role="status" title="שמירה אוטומטית בדפדפן הזה · לחיצה לשמירה מיידית">שמירה אוטומטית</button>
-      <div class="version" dir="ltr"><span></span> SURVIVAL <b>3.6</b></div>
+      <div class="version" dir="ltr"><span></span> SURVIVAL <b>3.7</b></div>
       <div id="notice" class="notice" role="status" hidden></div>
     </main>
     <script type="module">
-      import('./builds/eba63fb7b2c9264a/src/boot.js').catch((error) => {
+      import('./builds/0341aa29e67cc328/src/boot.js').catch((error) => {
         console.error(error);
         const notice = document.getElementById('notice');
         notice.textContent = 'לא הצלחנו להפעיל את המשחק. נסו לרענן את הדף או לפתוח אותו בדפדפן מעודכן.';

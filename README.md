@@ -1,6 +1,6 @@
 # ROOTS — שורשים
 
-Public browser build of ROOTS, version 3.6.
+Public browser build of ROOTS, version 3.7.
 
 Play: https://robinshmueli.github.io/roots-survival-play/
 
@@ -12,4 +12,6 @@ Craft a sword, hunt cows and chickens, and cook their meat in a wood-fueled furn
 
 Build cabins with walls, doors, floors and roofs. Open door leaves are passable, and nearby doors open without backing away. Trees and buildings fade while obscuring the player. Use an axe to pack and relocate the tent; the home pin follows it accurately. Sprint for twenty seconds and recover stamina in five. Hunger above 85% restores one health every three seconds.
 
-Source commit: 3f8d1b2eff95b78ff22158c4990c60edc4a33185
+Craft a pickaxe at a workbench with 3 stones, 2 logs and 1 fiber. Mine large rocks for 2–3 stones, collected with E. Loose stones and fiber bushes are more abundant. Chopped trees leave no stump or blocking roots. Every one or two harvested trees drops a species seed: equip it and click to plant close in front of the player. Saplings grow the next morning, retaining the tree species in any biome. Mining and planted trees persist across saves. Apples restore 5 hunger.
+
+Source commit: 94d313230329a1152d7ce700f1a290e0a099e108
